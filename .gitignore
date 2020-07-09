@@ -7,3 +7,4 @@ _*
 __pycache__
 trees/*
 *.gz
+venv/*
