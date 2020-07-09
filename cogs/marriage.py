@@ -24,20 +24,6 @@ class Marriage(utils.Cog):
         if text:
             return await ctx.send(text)
 
-        # See if our user is already married
-        if instigator_tree._partner:
-            return await ctx.send(text_processor.instigator_is_unqualified())
-
-        # See if the *target* is already married
-        if target_tree._partner:
-            return await ctx.send(text_processor.target_is_unqualified())
-
-        # See if they're already related
-        async with ctx.channel.typing():
-            relation = instigator_tree.get_relation(target_tree)
-        if relation and not self.bot.allows_incest(ctx.guild.id):
-            return await ctx.send(text_processor.target_is_family())
-
         # Check the size of their trees
         max_family_members = self.bot.guild_settings[ctx.guild.id]['max_family_members'] if self.bot.is_server_specific else self.bot.config['max_family_members']
         async with ctx.channel.typing():
